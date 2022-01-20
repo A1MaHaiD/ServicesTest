@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.handroid.servicestest.databinding.ActivityMainBinding
 import com.handroid.servicestest.services.MyForegroundService
+import com.handroid.servicestest.services.MyIntentService
 import com.handroid.servicestest.services.MyService
 
 class MainActivity : AppCompatActivity() {
@@ -24,6 +25,12 @@ class MainActivity : AppCompatActivity() {
             ContextCompat.startForegroundService(
                 this,
                 MyForegroundService.newIntent(this)
+            )
+        }
+        binding.tvIntentService.setOnClickListener {
+            ContextCompat.startForegroundService(
+                this,
+                MyIntentService.newIntent(this)
             )
         }
     }
