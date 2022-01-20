@@ -69,7 +69,7 @@ class MyIntentService : IntentService(NAME) {
         const val SERVICE_TAG = "SERVICE_TAG"
         const val SERVICE_ID = "SERVICE_ID"
         const val SERVICE_CHANNEL = "SERVICE_CHANNEL"
-        const val NAME = "MyIntentService"
+        private const val NAME = "MyIntentService"
 
         fun newIntent(context: Context): Intent = Intent(context, MyIntentService::class.java)
     }
