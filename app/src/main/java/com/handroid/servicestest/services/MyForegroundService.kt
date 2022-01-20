@@ -8,6 +8,7 @@ import android.content.Intent
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationCompat.FOREGROUND_SERVICE_DEFAULT
 import com.handroid.servicestest.R
 import kotlinx.coroutines.*
 
@@ -35,9 +36,11 @@ class MyForegroundService : Service() {
                 delay(1000)
                 log("Timer $i")
             }
+            stopSelf()
         }
         return START_STICKY
     }
+
 
     private fun createNotificationChannel() {
         val fNotificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
@@ -47,12 +50,14 @@ class MyForegroundService : Service() {
                 NotificationManager.IMPORTANCE_DEFAULT
             )
         fNotificationManager.createNotificationChannel(fNotificationChannel)
+
     }
 
     private fun createNotification() = NotificationCompat.Builder(this,SERVICE_ID)
         .setContentTitle("${getEmojiByUnicode(convertUnicodeToInt())}")
         .setContentText("Влаштуйся в Android Dev")
         .setSmallIcon(R.drawable.ic_android)
+//        .setForegroundServiceBehavior(FOREGROUND_SERVICE_DEFAULT)
         .build()
 
     override fun onBind(p0: Intent?): IBinder? {
