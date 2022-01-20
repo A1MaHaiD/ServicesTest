@@ -30,7 +30,7 @@ class MyService : Service() {
                 log("Timer $i")
             }
         }
-        return super.onStartCommand(intent, flags, startId)
+        return START_REDELIVER_INTENT
     }
 
     override fun onBind(p0: Intent?): IBinder? {
