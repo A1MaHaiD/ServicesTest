@@ -8,8 +8,12 @@ import android.os.Build
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import androidx.work.ExistingWorkPolicy
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
 import com.handroid.servicestest.databinding.ActivityMainBinding
 import com.handroid.servicestest.services.*
+import com.handroid.servicestest.workers.MyWorker
 
 class MainActivity : AppCompatActivity() {
 
@@ -56,7 +60,16 @@ class MainActivity : AppCompatActivity() {
             }
         }
         binding.jobIntentService.setOnClickListener {
-                MyJobIntentService.enqueue(this,page++)
+            MyJobIntentService.enqueue(this, page++)
+        }
+        binding.workManager.setOnClickListener {
+            WorkManager.getInstance(applicationContext).apply {
+                enqueueUniqueWork(
+                    MyWorker.WORK_NAME,
+                    ExistingWorkPolicy.APPEND,
+                    MyWorker.makeRequest(page++)
+                )
+            }
         }
     }
 }
