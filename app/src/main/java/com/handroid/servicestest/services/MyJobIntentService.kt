@@ -1,6 +1,5 @@
 package com.handroid.servicestest.services
 
-import android.app.IntentService
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -31,19 +30,7 @@ class MyJobIntentService : JobIntentService() {
         Log.d(SERVICE_TAG, "$NAME: $message")
     }
 
-    private fun getEmojiByUnicode(unicode: Int): String {
-        return String(Character.toChars(unicode))
-    }
-
-    private fun convertUnicodeToInt(): Int {
-        return Integer.parseInt(EMOJI_WITH_HORNS, 16)
-    }
-
     companion object {
-        const val EMOJI_DIZZY_FACE = "1F635"
-        const val EMOJI_WITH_SUNGLASSES = "1F60E"
-        const val EMOJI_WITH_HORNS = "1F608"
-
         const val SERVICE_TAG = "SERVICE_TAG"
         private const val NAME = "MyJobIntentService"
         private const val PAGE = "page"
