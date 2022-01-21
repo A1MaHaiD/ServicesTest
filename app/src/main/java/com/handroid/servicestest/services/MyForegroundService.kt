@@ -5,6 +5,7 @@ import android.app.NotificationManager
 import android.app.Service
 import android.content.Context
 import android.content.Intent
+import android.os.Build
 import android.os.IBinder
 import android.util.Log
 import androidx.core.app.NotificationCompat
@@ -42,15 +43,17 @@ class MyForegroundService : Service() {
 
     private fun createNotificationChannel() {
         val fNotificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val fNotificationChannel = NotificationChannel(
                 SERVICE_ID,
                 SERVICE_CHANNEL,
                 NotificationManager.IMPORTANCE_DEFAULT
             )
-        fNotificationManager.createNotificationChannel(fNotificationChannel)
+            fNotificationManager.createNotificationChannel(fNotificationChannel)
+        }
     }
 
-    private fun createNotification() = NotificationCompat.Builder(this,SERVICE_ID)
+    private fun createNotification() = NotificationCompat.Builder(this, SERVICE_ID)
         .setContentTitle("${getEmojiByUnicode(convertUnicodeToInt())}")
         .setContentText("Влаштуйся в Android Dev")
         .setSmallIcon(R.drawable.ic_android)
