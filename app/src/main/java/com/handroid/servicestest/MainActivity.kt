@@ -56,7 +56,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         binding.jobIntentService.setOnClickListener {
-
+                MyJobIntentService.enqueue(this,page++)
         }
     }
 }
